@@ -1,65 +1,103 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import React, { useEffect, useState } from 'react';
+
+import Head from 'next/head';
+
+import Core from '../components/Sections/Tech/Core';
+import Footer from '../components/Sections/Footer/Footer';
+import Hero from '../components/Sections/Hero/Hero';
+import Overview from '../components/Sections/Overview/Overview';
+import Tagline from '../components/Sections/Tagline/Tagline';
+import Tech from '../components/Sections/Tech/Tech';
+
+import { Box, Container, Grid } from '@chakra-ui/react';
+
+import styles from '../styles/Home.module.css';
+import 'animate.css/animate.min.css';
 
 export default function Home() {
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+	const [fixedStyle, setFixedStyle] = useState(false);
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+	const scrolled = e => {
+		if (window.scrollY >= 190) {
+			setFixedStyle(true);
+		} else {
+			setFixedStyle(false);
+		}
+	};
+	useEffect(() => {
+		window.addEventListener('scroll', scrolled);
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+		return () => {
+			window.removeEventListener('scroll', scrolled);
+		};
+	}, []);
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+	return (
+		<>
+			<Head>
+				<title>Jason Hay</title>
+				<link rel='icon' type='image/x-icon' href='/images/favicon.ico' />
+				<link
+					rel='apple-touch-icon'
+					sizes='180x180'
+					href='/images/apple-touch-icon.png'
+				/>
+				<link
+					rel='icon'
+					type='image/png'
+					sizes='32x32'
+					href='/images/favicon-32x32.png'
+				/>
+				<link
+					rel='icon'
+					type='image/png'
+					sizes='16x16'
+					href='/images/favicon-16x16.png'
+				/>
+				<link rel='manifest' href='/site.webmanifest' />
+				<link rel='preconnect' href='https://fonts.gstatic.com' />
+				<link
+					href='https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap'
+					rel='stylesheet'
+				/>
+				<link
+					href='https://fonts.googleapis.com/css2?family=Signika:wght@300;400;500;600;700&display=swap'
+					rel='stylesheet'
+				/>
+			</Head>
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
-  )
+			<Grid templateColumns='1fr' gap={100}>
+				<div
+					id='bar'
+					className={fixedStyle ? styles.meFixedBox : styles.meFixedBoxClear}
+				></div>
+				<Box>
+					<Container>
+						<Hero fixedClass={fixedStyle} />
+					</Container>
+				</Box>
+				<Box>
+					<Container>
+						<Tagline />
+					</Container>
+				</Box>
+				<Box>
+					<Container>
+						<Overview />
+					</Container>
+				</Box>
+				<Box>
+					<Container>
+						<Core />
+					</Container>
+				</Box>
+				<Box>
+					<Container>
+						<Tech />
+					</Container>
+				</Box>
+				<Footer />
+			</Grid>
+		</>
+	);
 }
