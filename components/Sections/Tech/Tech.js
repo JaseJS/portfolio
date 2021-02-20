@@ -41,12 +41,6 @@ const Tech = props => {
 					description='Oracle, SQL Server, PostgreSQL. MongoDB, Firebase, Redis.'
 				/>
 				<TechBlock
-					icon={DiDatabase}
-					headingColor='brand.red'
-					title='RDBMS / NoSQL'
-					description='Oracle, SQL Server, PostgreSQL. MongoDB, Firebase, Redis.'
-				/>
-				<TechBlock
 					icon={AiOutlineCloudServer}
 					headingColor='brand.red'
 					title='Web Services'
